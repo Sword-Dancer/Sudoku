@@ -1,7 +1,5 @@
 <?
-require_once 'classes/Sudoku.php';
-require_once 'classes/SortBuilder.php';
-require_once 'classes/BasicFieldBuilder.php';
+require_once '/classes/AutoLoading.php';
 
 $sudoku = new Sudoku();
 ?>
