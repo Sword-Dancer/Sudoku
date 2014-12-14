@@ -8,12 +8,29 @@
 
 class AutoLoading 
 {
-	private static $class_path = "/classes/";
+	private static $class_path = "classes/";
 	private static $extension = ".php";
 
 	public static function loadingClasses($class)
 	{
-		require_once  self::$class_path . $class . self::$extension;
+		try
+		{
+			self::doInclude($class);
+		} 
+		catch (Exception $e)
+		{
+		    echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+		}
+	}
+
+	private static function doInclude($class)
+	{
+		$file = self::$class_path . $class . self::$extension;
+	    if (!file_exists($file))
+	    {
+	        throw new Exception('файла с классом нет');
+	    }
+    	require_once $file;
 	}
 }
 

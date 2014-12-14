@@ -1,8 +1,60 @@
-body {font-family:Tahoma; font-size: 14px; color: #666;}
+body {font-family: tahoma,serif; font-size: 14px; color: #333}
+a {color: #E25173}
+a:hover {color: #DB0638; text-decoration: none}
 
-.sudoku_table {border-collapse: collapse;}
-.sudoku_table td {padding: 5px 10px; border: 1px dotted #999}
-.sudoku_table td:nth-child(3n+3) {border-right: 2px solid #000;}
-.sudoku_table tr:nth-child(3n+3) {border-bottom: 2px solid #000;}
-.sudoku_table td:nth-child(1) {border-left: 2px solid #000;}
-.sudoku_table tr:nth-child(1) {border-top: 2px solid #000;}
+#top_menu {margin:10px auto 0 auto; display: table; border-bottom: 1px solid #999;}
+#top_menu ul {padding: 0;}
+#top_menu li {display: inline-block; padding: 5px 14px; margin: 0 10px}
+#top_menu li.select {background: #E25173; color: #fff}
+#top_menu a {font-size: 16px; text-decoration: none;}
+#top_menu li.select a {color: #fff}
+
+#level {padding: 5px 7px; margin: 20px 40px;  float: left;}
+#level #label {display: inline-block; margin-right: 10px}
+#level a {cursor: pointer; display:inline-block; padding: 3px 10px;}
+#level a.select {background: #E25173; color: #fff; text-decoration: none}
+
+
+#net_wrapper {margin:auto; display: table;}
+#net {border-collapse: collapse; margin:30px auto; border: 3px solid #555; font-family: verdana,monospace;
+	font-size: 26px; position: relative; z-index:5; width: 486px}
+#net td {width:50px; height: 50px; border: 1px solid #777; text-align: center; cursor: pointer;}
+#net td:nth-child(3), #net td:nth-child(6) {border-right: 3px solid #555}
+#net tr:nth-child(3), #net tr:nth-child(6) {border-bottom: 3px solid #555}
+#net .lock {font-weight: bold; cursor: default;}
+
+#net .mark_big_num {background: #FFD6E2;}
+#net .mark_small_num {background: #EAA6AF;}
+
+#net .big_num {}
+#net .small_num {display: inline-block; font-size: 12px; position: absolute; z-index: 1}
+#net .active_cell {box-shadow: 1px 1px 10px 0 #666;}
+
+#construct_mode {padding: 5px 7px; margin: 20px 50px; cursor: pointer; float: left;}
+#construct_mode.on {background: #666; color: #fff}
+#construct_mode.off {background:white; color: #333}
+
+#menu {float: right;}
+#menu #clear {padding: 5px 7px; margin: 10px 50px; cursor: pointer; border: 1px solid #666}
+#menu #save  {padding: 5px 7px; margin: 10px 50px; cursor: pointer; border: 1px solid #666}
+#menu #load  {padding: 5px 7px; margin: 10px 50px; cursor: pointer; border: 1px solid #666}
+
+
+#nums {display:table; margin: 10px auto}
+#nums .num {cursor: pointer; display:inline-block; padding: 3px 10px; font-size: 28px}
+#nums .on {background: #666; color: #fff}
+#nums .off {background:white; color: #333}
+
+#nums #pencil {cursor: pointer; display:inline-block; padding: 3px 10px; font-size: 28px; margin-right: 5px}
+#nums #erase  {cursor: pointer; display:inline-block; padding: 3px 10px; font-size: 28px; margin-left: 5px}
+
+
+#hint li {margin: 5px; font-size: 12px; color: #666}
+
+#footer {display: table; margin: 0 auto; text-align: center; border-top: 1px solid #999; 
+	padding: 8px 25px; font-size: 12px; color: #666; line-height: 18px;}
+
+
+
+
+
