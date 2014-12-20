@@ -35,9 +35,7 @@ a:hover {color: #DB0638; text-decoration: none}
 #construct_mode.off {background:white; color: #333}
 
 #menu {float: right;}
-#menu #clear {padding: 5px 7px; margin: 10px 50px; cursor: pointer; border: 1px solid #666}
-#menu #save  {padding: 5px 7px; margin: 10px 50px; cursor: pointer; border: 1px solid #666}
-#menu #load  {padding: 5px 7px; margin: 10px 50px; cursor: pointer; border: 1px solid #666}
+#menu div {padding: 5px 7px; margin: 5px 50px; cursor: pointer; border: 1px solid #666}
 
 
 #nums {display:table; margin: 10px auto}

@@ -17,6 +17,7 @@ class Sudoku
      * __construct Вызывает класс, считывающий настройки, затем генератор
      * базовой сетки, потом сортировщик
      * @param string $ini_file_path Путь до файла с конфигурацией
+     * @param int $level Уровень сложности
      */
     public function __construct($ini_file_path, $level)
     {
@@ -30,7 +31,6 @@ class Sudoku
 
         $obTask = new Task($this->obConfig, $arField, $level);
         $arField = $obTask->getTaskField();
-
         $this->arField = $arField;
     }
 

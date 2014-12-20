@@ -35,4 +35,3 @@ class AutoLoading
 }
 
 spl_autoload_register(array('AutoLoading', 'loadingClasses'));
-?>

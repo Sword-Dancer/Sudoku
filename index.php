@@ -13,6 +13,7 @@ $obSudoku = new Sudoku('/config.ini', $level);
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="jquery.json-2.4.js"></script>
 	<script src="script.js"></script>
 
 </head>
@@ -21,15 +22,15 @@ $obSudoku = new Sudoku('/config.ini', $level);
 
     <div id="level">
         <div id="label">Уровень:</div>
-        <a href="?level=1" <?if($level==1):?>class="select"<?endif?>>Простой</a>
-        <a href="?level=2" <?if($level==2):?>class="select"<?endif?>>Средний</a>
-        <a href="?level=3" <?if($level==3):?>class="select"<?endif?>>Сложный</a>
+        <a href="?level=1" id="level_1" <?if($level==1):?>class="select"<?endif?>>Простой</a>
+        <a href="?level=2" id="level_2" <?if($level==2):?>class="select"<?endif?>>Средний</a>
+        <a href="?level=3" id="level_3" <?if($level==3):?>class="select"<?endif?>>Сложный</a>
     </div>
 
 	<div id="menu">
 		<div id="clear">Очистить</div>
-		<!--<div id="save">Сохранить</div>
-		<div id="load">Загрузить</div>-->
+		<div id="save">Сохранить</div>
+		<div id="load">Загрузить</div>
 	</div>
 
 	<br><br><br><br><br><br>
@@ -56,13 +57,9 @@ $obSudoku = new Sudoku('/config.ini', $level);
 				<?foreach ($x as $y):?>
 					<td
                         id="cell_<?=$i?>"
-                        class="
-                            <?if($y):?>lock<?else:?>unlock<?endif;?>
-                            <?if($i==1):?>active_cell<?endif;?>
-                        "
-                    >
+                        class="<?if($y):?>lock<?else:?>unlock<?endif;?><?if($i==1):?> active_cell<?endif;?>">
                         <?if($y):?>
-                            <div type="big_num" num="<?=$y?>" id="big_num_<?=$i?>_<?=$y?>" class="big_num">
+                            <div data-type="big_num" data-num="<?=$y?>" id="big_num_<?=$i?>_<?=$y?>" class="big_num">
                                 <?=$y?>
                             </div>
                         <?endif;?>

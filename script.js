@@ -2,52 +2,105 @@ $(document).ready(function(){
 
     var construct_btn = $('#construct_mode'),
         pencil_btn = $('#pencil'),
-        eraser_btn = $('#erase');
+        eraser_btn = $('#erase'),
+        load_btn = $('#load'),
+        save_btn = $('#save'),
+        cells = $('#net').find('td');
 
     construct_btn.click(function(){checkerOnOff($(this));});
     pencil_btn.   click(function(){checkerOnOff($(this));});
     eraser_btn.   click(function(){checkerOnOff($(this));});
 
 
-
-    /*if ($.cookie('sudoku'))
+    if ($.cookie('has_saved_game'))
     {
-    	$('#net_wrapper').html($.cookie('sudoku'));
+        load_btn.click();
     }
 
     $(window).unload(function(){
-    	$.cookie('sudoku', $('#net').prop('outerHTML'), {expires:365});
-    });*/
+        save_btn.click();
+    });
 
-	/*$('#save').click(function(){
+    save_btn.click(function(){
+        var cell_classes = {},
+            small_nums = {},
+            big_nums = {};
 
-        var net;
+        cells.each(function (i, cell) {
+            var cell_id = cell.id,
+                td = $('#'+cell_id);
 
+            cell_classes[cell_id] = [];
+            cell_classes[cell_id].push(td.attr("class"));
 
+            small_nums[cell_id] = [];
+            big_nums[cell_id] = [];
+            td.children().each(function (j, num) {
+                var num_element = $('#'+num.id);
+                var type = num_element.data("type");
 
-        $('#net td').each(function (i, cell) {
-
-            console.log(cell.id);
-            console.log(this);
-
-            net[cell.id] = [cell.attr("class")];
-            cell.children().each(function (j, num) {
-                net[cell.id].push(num.attr("type"));
-                net[cell.id].push(num.attr("num"));
+                if (type == 'small_num')
+                {
+                    small_nums[cell_id].push(num_element.data("num"));
+                }
+                if (type == 'big_num')
+                {
+                    big_nums[cell_id].push(num_element.data("num"));
+                }
             });
-
-
         });
 
-        console.log(net);
+        $.cookie('cell_classes', $.toJSON(cell_classes), {expires:365});
+        $.cookie('small_nums',   $.toJSON(small_nums),   {expires:365});
+        $.cookie('big_nums',     $.toJSON(big_nums),     {expires:365});
 
-        //$.cookie('sudoku', $('#net').prop('outerHTML'), {expires:365});
-		//alert("zd");
+        $.cookie('num', $(".num.on").attr("id"), {expires:365});
+        $.cookie('level', $("#level").find(".select").attr("id"), {expires:365});
+        $.cookie('has_saved_game', true, {expires:365});
 	});
 
-	$('#load').click(function(){
-		//$('#net_wrapper').html($.cookie('sudoku'));
-	});*/
+    load_btn.click(function(){
+
+        var select_num_elem = $('.num.on'),
+            select_num = exist(select_num_elem) ? getSelectNum(select_num_elem) : false;
+        unMarkCell(select_num);
+
+        insertSavedClasses($.cookie('cell_classes'));
+        insertSavedNums($.cookie('small_nums'), insertSmallNum);
+        insertSavedNums($.cookie('big_nums'), insertBigNum);
+
+        $('#'+$.cookie('num')).click();
+        $('#level').find('.select').removeClass('select');
+        $('#'+$.cookie('level')).addClass('select');
+	});
+    function insertSavedClasses(json)
+    {
+        var cell_classes = $.parseJSON(json);
+
+        cells.children().remove();
+        cells.removeAttr("class");
+
+        cells.each(function (i, cell) {
+            var cell_id = cell.id,
+                td = $('#'+cell_id);
+
+            td.attr("class", cell_classes[cell_id]);
+        });
+    }
+    function insertSavedNums(json, method)
+    {
+        var nums = $.parseJSON(json);
+        for (var cell_id in nums) {
+            if (nums.hasOwnProperty(cell_id))
+            {
+                nums[cell_id].forEach(function (item, j, cell_nums) {
+                    cell_nums.forEach(function (num) {
+                        method($('#' + cell_id), num);
+                    });
+                });
+            }
+        }
+    }
 
     $('html').keydown(function(){
        
@@ -93,7 +146,7 @@ $(document).ready(function(){
 
         unMarkCell(select_num);
 		
-		var cell_class = (construct_btn.hasClass('off')) ? ".unlock" : "";
+		var cell_class = (construct_btn.hasClass('off') || !exist(construct_btn)) ? ".unlock" : "";
 		$('#net').find('td'+cell_class).children().remove();
 
         markCell(select_num);
@@ -117,7 +170,7 @@ $(document).ready(function(){
             unMarkCell(num);
     });
 
-    $('#net').find('td').click(function(){
+    cells.click(function(){
         var td = $(this),
             select_num_elem = $('.num.on'),
             select_num = exist(select_num_elem) ? getSelectNum(select_num_elem) : false,
@@ -129,8 +182,8 @@ $(document).ready(function(){
             isLockCell = td.hasClass('lock'),
 
             noBigNum = (!exist(td.children(".big_num"))),
-            hasSelectBigNum = exist(td.children("div[type=big_num][num="+select_num+"]")),
-            hasSelectSmallNum = exist(td.children("div[type=small_num][num="+select_num+"]"));
+            hasSelectBigNum = exist(td.children("div[data-type=big_num][data-num="+select_num+"]")),
+            hasSelectSmallNum = exist(td.children("div[data-type=small_num][data-num="+select_num+"]"));
 
         var mode_eraseInConstruct =    (isConstruct && !select_num && isErase),
             mode_eraseNumInConstruct = (isConstruct && select_num  && hasSelectBigNum),
@@ -206,14 +259,14 @@ function changeActiveCell(new_cell_pos)
 function markCell(num)
 {
     var net = $("#net");
-    net.find("div[num="+num+"][type=big_num]").parent().addClass('mark_big_num');
-    net.find("div[num="+num+"][type=small_num]").parent().addClass('mark_small_num');
+    net.find("div[data-num="+num+"][data-type=big_num]").parent().addClass('mark_big_num');
+    net.find("div[data-num="+num+"][data-type=small_num]").parent().addClass('mark_small_num');
 }
 function unMarkCell(num)
 {
     var net = $("#net");
-    net.find("div[num="+num+"][type=big_num]").parent().removeClass('mark_big_num');
-    net.find("div[num="+num+"][type=small_num]").parent().removeClass('mark_small_num');
+    net.find("div[data-num="+num+"][data-type=big_num]").parent().removeClass('mark_big_num');
+    net.find("div[data-num="+num+"][data-type=small_num]").parent().removeClass('mark_small_num');
 }
 
 function insertSmallNum(td, num)
@@ -222,8 +275,8 @@ function insertSmallNum(td, num)
     var small_num = $("<div/>", {
         "class": "small_num",
         "id": 'small_num_' + cell_num + '_' + num,
-        "num": num,
-        "type": "small_num",
+        "data-num": num,
+        "data-type": "small_num",
         text: num
     }).appendTo("#cell_" + cell_num);
 
@@ -244,23 +297,23 @@ function insertBigNum(td, num)
     $("<div/>", {
         "class": "big_num",
         "id": 'big_num_' + cell_num + '_' + num,
-        "num": num,
-        "type": "big_num",
+        "data-num": num,
+        "data-type": "big_num",
         text: num
     }).appendTo(td);
 }
 
 function erasePencil(td)
 {
-    td.children("div[type=small_num]").remove();
+    td.children("div[data-type=small_num]").remove();
 }
 function eraseBigNum(td)
 {
-    td.children("div[type=big_num]").remove();
+    td.children("div[data-type=big_num]").remove();
 }
 function eraseSmallNum(td, num)
 {
-    td.children("div[type=small_num][num="+num+"]").remove();
+    td.children("div[data-type=small_num][data-num="+num+"]").remove();
 }
 
 function lockCell(td)

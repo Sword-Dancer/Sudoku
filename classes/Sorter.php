@@ -38,8 +38,8 @@ class Sorter
 	/**
 	 * getChangedVerticalSquaresFromField
 	 * Меняет местами две случайных колонки из квадратов
-	 * @param array Исходная сетка
-	 * @return array Отсортированная сетка
+	 * @param array $arField Исходная сетка
+	 * @return array $arField Отсортированная сетка
 	 */
 	public function changeVerticalSquares($arField)
 	{
@@ -62,8 +62,8 @@ class Sorter
 	/**
 	 * getChangedHorizontalSquaresFromField
 	 * Меняет местами две случайных линии из квадратов
-	 * @param array Исходная сетка
-	 * @return array Отсортированная сетка
+     * @param array $arField Исходная сетка
+     * @return array $arField Отсортированная сетка
 	 */
 	public function changeHorizontalSquares($arField)
 	{
@@ -106,8 +106,8 @@ class Sorter
 	/**
 	 * getChangedIntoSquareColumnsField
 	 * Меняет местами две случайных колонки в пределах квадрата
-	 * @param array Исходная сетка
-	 * @return array Отсортированная сетка
+     * @param array $arField Исходная сетка
+     * @return array $arField Отсортированная сетка
 	 */
 	public function changeColumnsInSquare($arField)
 	{
@@ -124,8 +124,8 @@ class Sorter
 	/**
 	 * getChangedIntoSquareLinesField
 	 * Меняет местами две случайных линии в пределах квадрата
-	 * @param array Исходная сетка
-	 * @return array Отсортированная сетка
+     * @param array $arField Исходная сетка
+     * @return array $arField Отсортированная сетка
 	 */
 	public function changeLinesInSquare($arField)
 	{
@@ -160,8 +160,8 @@ class Sorter
 	/**
 	 * getTransposingField
 	 * Транспорнирует сетку
-	 * @param array Исходная сетка
-	 * @return array Отсортированная сетка
+     * @param array $arField Исходная сетка
+     * @return array $arField Отсортированная сетка
 	 */
 	public function transposing($arField)
 	{
