@@ -21,13 +21,13 @@ class Config
 	{
 		$arConfig = parse_ini_file($ini_file_path);
 		
-		$this->num_max = $arConfig['num_max'];
-		$this->num_min = $arConfig['num_min'];
-		$this->pos_max = $arConfig['pos_max'];
-		$this->pos_min = $arConfig['pos_min'];
-		$this->square_quantity = $arConfig['square_quantity'];
-		$this->square_size =     $arConfig['square_size'];
-		$this->square_pos_max =  $arConfig['square_pos_max'];
+		$this->num_max = (int)$arConfig['num_max'];
+		$this->num_min = (int)$arConfig['num_min'];
+		$this->pos_max = (int)$arConfig['pos_max'];
+		$this->pos_min = (int)$arConfig['pos_min'];
+		$this->square_quantity = (int)$arConfig['square_quantity'];
+		$this->square_size =     (int)$arConfig['square_size'];
+		$this->square_pos_max =  (int)$arConfig['square_pos_max'];
 	}
 
 	public function getConfig()
