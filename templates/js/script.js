@@ -60,7 +60,6 @@ $(document).ready(function(){
 	});
 
     load_btn.click(function(){
-
         var select_num_elem = $('.num.on'),
             select_num = exist(select_num_elem) ? getSelectNum(select_num_elem) : false;
         unMarkCell(select_num);

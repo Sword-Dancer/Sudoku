@@ -29,6 +29,11 @@ class Task
         $this->arTaskField = $this->createTaskField($arField);
     }
 
+    /**
+     * createTaskField Создание игрового поля
+     * @param array $arField Полностью заполненная сетка
+     * @return array $arTaskField Сетка с удалёнными значениями
+     */
     private function createTaskField($arField)
     {
         $arTaskField = $this->deleteRandomNums($arField);
@@ -40,6 +45,11 @@ class Task
         return $arTaskField;
     }
 
+    /**
+     * deleteRandomNums Удаление случайных значений в зависимости от уровня сложности
+     * @param array $arField
+     * @return array $arField
+     */
     private function deleteRandomNums($arField)
     {
         $delete_count = rand(
