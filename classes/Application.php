@@ -9,13 +9,14 @@
 
 class Application
 {
+    private $head_template;
 	private $top_menu;
 	private $top_menu_template;
 	private $footer_template;
 
-
-	public function __construct($top_menu_template, $footer_template)
+	public function __construct($head_template, $top_menu_template, $footer_template)
 	{
+        $this->head_template = $head_template;
 		$this->top_menu_template = $top_menu_template;
 		$this->footer_template = $footer_template;
 
@@ -64,4 +65,9 @@ class Application
 	{
 		return $this->footer_template;
 	}
+
+    public function getHeadTemplate()
+    {
+        return $this->head_template;
+    }
 }

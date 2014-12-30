@@ -1,21 +1,19 @@
 <?
 require_once '/classes/AutoLoading.php';
 
-$obApp = new Application("/templates/top_menu.php", "/templates/footer.php");
+$obApp = new Application(
+    "/templates/head.php",
+    "/templates/top_menu.php",
+    "/templates/footer.php"
+);
 $level = isset($_GET['level']) ? (int)$_GET['level'] : 1;
 $obSudoku = new Sudoku('/config.ini', $level);
 ?>
 
 <html>
 <head>
-	<meta charset="utf-8">
+    <? require_once $obApp->getHeadTemplate(); ?>
 	<title>Судоку</title>
-	<link rel="stylesheet" type="text/css" href="templates/styles/style.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="templates/js/jquery.json-2.4.js"></script>
-	<script src="templates/js/script.js"></script>
-
 </head>
 <body>
 	<? require_once $obApp->getTopMenuTemplate(); ?>
@@ -80,6 +78,8 @@ $obSudoku = new Sudoku('/config.ini', $level);
 			<li><b>Enter</b> — вставка</li>
 		</ul>
 	</div>
+
+    <div id="save_popup">&#10004; Игра сохранена</div>
 
     <? require_once $obApp->getFooterTemplate(); ?>
 

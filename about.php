@@ -1,12 +1,15 @@
 <?
 require_once '/classes/AutoLoading.php';
-$obApp = new Application("/templates/top_menu.php", "/templates/footer.php");
+$obApp = new Application(
+    "/templates/head.php",
+    "/templates/top_menu.php",
+    "/templates/footer.php"
+);
 ?>
 <html>
 <head>
+    <? require_once $obApp->getHeadTemplate(); ?>
     <title>О проекте</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="templates/styles/style.css">
 </head>
 <body>
     <? require_once $obApp->getTopMenuTemplate(); ?>

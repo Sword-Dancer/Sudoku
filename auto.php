@@ -1,15 +1,15 @@
 <?
 require_once '/classes/AutoLoading.php';
-$obApp = new Application("/templates/top_menu.php", "/templates/footer.php");
+$obApp = new Application(
+    "/templates/head.php",
+    "/templates/top_menu.php",
+    "/templates/footer.php"
+);
 ?>
 <html>
 <head>
+    <? require_once $obApp->getHeadTemplate(); ?>
 	<title>Судоку с произвольным условием</title>
-	<meta charset="utf-8">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-	<script src="templates/js/script.js"></script>
-	<link rel="stylesheet" type="text/css" href="templates/styles/style.css">
 </head>
 <body>
 

@@ -16,6 +16,11 @@ $(document).ready(function(){
     {
         load_btn.click();
     }
+    else
+    {
+        load_btn.addClass("hide");
+    }
+
 
     $(window).unload(function(){
         save_btn.click();
@@ -57,6 +62,11 @@ $(document).ready(function(){
         $.cookie('num', $(".num.on").attr("id"), {expires:365});
         $.cookie('level', $("#level").find(".select").attr("id"), {expires:365});
         $.cookie('has_saved_game', true, {expires:365});
+
+        load_btn.removeClass("hide");
+
+        $("#save_popup").slideToggle('slow');
+        setTimeout('$("#save_popup").slideToggle("slow");', 5000);
 	});
 
     load_btn.click(function(){

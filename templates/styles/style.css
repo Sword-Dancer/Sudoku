@@ -41,7 +41,7 @@ h2 {font-weight: normal;}
 
 #menu {float: right;}
 #menu div {padding: 5px 7px; margin: 5px 50px; cursor: pointer; border: 1px solid #666}
-
+#menu .hide {opacity: 0.5; cursor: default;}
 
 #nums {display:table; margin: 10px auto}
 #nums .num {cursor: pointer; display:inline-block; padding: 3px 10px; font-size: 28px}
@@ -53,6 +53,10 @@ h2 {font-weight: normal;}
 
 
 #hint li {margin: 5px; font-size: 12px; color: #666}
+
+#save_popup {display: none; position: absolute; top: 110px; width: 200px; margin: 0 auto; left: 41%;
+    background: white; box-shadow: 1px 1px 8px 1px #666; text-align: center; padding: 10px;}
+
 
 #footer {display: table; margin: 0 auto; text-align: center; border-top: 1px solid #999; 
 	padding: 8px 25px; font-size: 12px; color: #666; line-height: 18px;}
